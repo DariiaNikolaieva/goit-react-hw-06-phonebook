@@ -12,7 +12,7 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
-import contactsReducer from "./contacts/contact-reducer";
+import contactsReducer from "./contacts/contacts-reducer";
 
 const contactsPersistConfig = {
   key: "contacts",
@@ -38,4 +38,5 @@ const store = configureStore({
 });
 const persistor = persistStore(store);
 
+/* eslint import/no-anonymous-default-export: [2, {"allowObject": true}] */
 export default { store, persistor };

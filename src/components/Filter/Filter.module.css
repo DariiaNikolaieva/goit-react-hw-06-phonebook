@@ -1,6 +1,8 @@
-.wrapper {
-  padding: 15px;
-  border-radius: 5px;
-  border: 1px solid teal;
-  background-color: palegoldenrod;
+.form {
+  margin-bottom: 20px;
+  color: #3a1b14;
+}
+
+.input {
+  padding-left: 5px;
 }

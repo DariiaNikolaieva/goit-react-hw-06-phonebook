@@ -1,19 +1,20 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import contactsActions from "../../redux/contacts/contact-actions";
-import s from "./ContactList.module.css";
+import contactsActions from "../../redux/contacts/contacts-actions";
 
-const ContactList = ({ contactList, onDeleteContact }) => {
+import styles from "./ContactList.module.css";
+
+const ContactList = ({ contacts, onDeleteContact }) => {
   return (
-    <ul>
-      {contactList.map(({ id, name, number }) => (
-        <li className={s.element} key={id}>
+    <ul className={styles.list}>
+      {contacts.map(({ id, name, number }) => (
+        <li key={id} className={styles.item}>
           <p>{name}: </p>
           <p>{number}</p>
           <button
-            className={s.btn}
             type="button"
+            className={styles.button}
             onClick={() => onDeleteContact(id)}
           >
             Delete
@@ -25,7 +26,7 @@ const ContactList = ({ contactList, onDeleteContact }) => {
 };
 
 ContactList.propTypes = {
-  contactList: PropTypes.array.isRequired,
+  contacts: PropTypes.array.isRequired,
   onDeleteContact: PropTypes.func.isRequired,
 };
 

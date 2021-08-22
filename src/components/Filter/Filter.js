@@ -1,23 +1,28 @@
-import React from "react";
-import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import contactsActions from "../../redux/contacts/contact-actions";
-import s from "./Filter.module.css";
+import { connect } from "react-redux";
+import contactsActions from "../../redux/contacts/contacts-actions";
+
+import styles from "./Filter.module.css";
 
 const Filter = ({ filterValue, onFilter }) => {
   return (
-    <form className={s.wrapper}>
+    <form className={styles.form}>
       <label>
-        Find contacts by name{" "}
-        <input type="text" value={filterValue} onChange={onFilter} />
+        Find contacts by name
+        <input
+          type="text"
+          className={styles.input}
+          value={filterValue}
+          onChange={onFilter}
+        />
       </label>
     </form>
   );
 };
 
 Filter.propTypes = {
-  filterValue: PropTypes.string.isRequired,
-  onFilter: PropTypes.func.isRequired,
+  filterValue: PropTypes.string,
+  onFilter: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({

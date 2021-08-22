@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import contactsActions from "../../redux/contacts/contact-actions";
-import s from "./ContactForm.module.css";
+import contactsActions from "../../redux/contacts/contacts-actions";
+
+import styles from "./ContactForm.module.css";
 
 class ContactForm extends Component {
   state = {
@@ -9,8 +10,8 @@ class ContactForm extends Component {
     number: "",
   };
 
-  handleSubmit = (ev) => {
-    ev.preventDefault();
+  handleSubmit = (e) => {
+    e.preventDefault();
     const { name } = this.state;
     const { contacts } = this.props;
 
@@ -41,26 +42,33 @@ class ContactForm extends Component {
   render() {
     const { name, number } = this.state;
     return (
-      <form className={s.wrapper} onSubmit={this.handleSubmit}>
-        <label>
+      <form className={styles.form} onSubmit={this.handleSubmit}>
+        <label className={styles.labelTitle}>
           Name:
           <input
             type="text"
             name="name"
+            className={styles.input}
             value={name}
             onChange={this.handleInputChange}
           />
         </label>
-        <label>
+        <label className={styles.labelTitle}>
           Phone:
           <input
             type="text"
             name="number"
+            className={styles.input}
+            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+            title="The telephone number must contain numbers and may contain spaces, dashes, parentheses and may start with +"
+            required
             value={number}
             onChange={this.handleInputChange}
           />
         </label>
-        <button type="submit">Add contact</button>
+        <button type="submit" className={styles.button}>
+          Add contact
+        </button>
       </form>
     );
   }
