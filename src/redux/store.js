@@ -11,7 +11,8 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import contactsReducer from "./contacts/contacts-reducer";
+
+import contactsReducer from "./contacts/contact-reducer";
 
 const contactsPersistConfig = {
   key: "contacts",
@@ -28,14 +29,13 @@ const middleware = [
   logger,
 ];
 
-export const store = configureStore({
+const store = configureStore({
   reducer: {
     contacts: persistReducer(contactsPersistConfig, contactsReducer),
   },
   middleware,
   devTools: process.env.NODE_ENV === "development",
 });
-
-export const persistor = persistStore(store);
+const persistor = persistStore(store);
 
 export default { store, persistor };
