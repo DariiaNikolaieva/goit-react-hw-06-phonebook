@@ -31,9 +31,9 @@ ContactList.propTypes = {
 };
 
 const filterContacts = (contacts, filter) => {
-  const normFilter = filter.toLowerCase();
+  const nonormalizedFilter = filter.toLowerCase();
   return contacts.filter((contact) =>
-    contact.name.toLowerCase().includes(normFilter)
+    contact.name.toLowerCase().includes(nonormalizedFilter)
   );
 };
 

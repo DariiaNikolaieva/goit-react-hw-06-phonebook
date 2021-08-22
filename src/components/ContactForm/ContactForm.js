@@ -15,11 +15,15 @@ class ContactForm extends Component {
     const { name } = this.state;
     const { contacts } = this.props;
 
-    const uniqueContact = contacts.find(
-      (item) => item.name.toLowerCase() === name.toLowerCase()
-    );
-    if (uniqueContact) {
-      alert(`${name} is already in your list`);
+    if (!this.state.name || !this.state.number) {
+      alert("Enter the name!");
+      return;
+    }
+
+    if (
+      contacts.find((item) => item.name.toLowerCase() === name.toLowerCase())
+    ) {
+      alert(`${name} exists. Try another name`);
       return;
     }
 
