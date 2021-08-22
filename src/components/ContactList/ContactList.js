@@ -5,10 +5,10 @@ import contactsActions from "../../redux/contacts/contacts-actions";
 
 import styles from "./ContactList.module.css";
 
-const ContactList = ({ contacts, onDeleteContact }) => {
+const ContactList = ({ contactList, onDeleteContact }) => {
   return (
     <ul className={styles.list}>
-      {contacts.map(({ id, name, number }) => (
+      {contactList.map(({ id, name, number }) => (
         <li key={id} className={styles.item}>
           <p>{name}: </p>
           <p>{number}</p>
