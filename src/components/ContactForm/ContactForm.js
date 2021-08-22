@@ -1,43 +1,42 @@
-import { useState } from "react";
+import { Component } from "react";
+import { connect } from "react-redux";
+import { addContact } from "../../redux/contacts/contacts-actions";
 
 import styles from "./ContactForm.module.css";
 
-export default function ContactForm({onSubmit}) {
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+class ContactForm extends Component {
+  state = {
+    name: "",
+    number: "",
+  };
 
-  const handleSubmit = (e) => {
+  handleSubmit = (e) => {
     e.preventDefault();
-    if (!name || !number) {
-      alert('Enter the name!');
+    if (this.state.name && this.state.number !== "") {
+      const { name, number } = this.state;
+      this.props.onSubmit({ name, number });
+      this.resetForm();
       return;
     }
-    onSubmit(name, number);
-    resetForm();
-  }
+    alert("Please, check the field NAME and NUMBER is not empty");
+  };
 
-  const handleInputChange = (e) => {
+  handleInputChange = (e) => {
     const { name, value } = e.target;
+    this.setState({ [name]: value });
+  };
 
-    switch (name) {
-      case "name":
-        setName(value);
-        break;
-      case "number":
-        setNumber(value);
-        break;
-      default:
-        return;
-    }
-  }
-  
-  const resetForm = () => {
-    setName('');
-    setNumber('');
-  }
+  resetForm = () => {
+    this.setState({
+      name: "",
+      number: "",
+    });
+  };
 
-   return (
-      <form className={styles.form} onSubmit={handleSubmit}>
+  render() {
+    const { name, number } = this.state;
+    return (
+      <form className={styles.form} onSubmit={this.handleSubmit}>
         <label className={styles.labelTitle}>
           Name:
           <input
@@ -45,7 +44,7 @@ export default function ContactForm({onSubmit}) {
             name="name"
             className={styles.input}
             value={name}
-            onChange={handleInputChange}
+            onChange={this.handleInputChange}
           />
         </label>
         <label className={styles.labelTitle}>
@@ -58,7 +57,7 @@ export default function ContactForm({onSubmit}) {
             title="The telephone number must contain numbers and may contain spaces, dashes, parentheses and may start with +"
             required
             value={number}
-            onChange={handleInputChange}
+            onChange={this.handleInputChange}
           />
         </label>
         <button type="submit" className={styles.button}>
@@ -66,4 +65,11 @@ export default function ContactForm({onSubmit}) {
         </button>
       </form>
     );
+  }
 }
+
+const mapDispatchToProps = (dispatch) => ({
+  onSubmit: (contact) => dispatch(addContact(contact)),
+});
+
+export default connect(null, mapDispatchToProps)(ContactForm);
