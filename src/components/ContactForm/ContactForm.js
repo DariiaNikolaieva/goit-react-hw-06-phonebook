@@ -23,7 +23,7 @@ class ContactForm extends Component {
     if (
       contacts.find((item) => item.name.toLowerCase() === name.toLowerCase())
     ) {
-      alert(`${name} exists. Try another name`);
+      alert(`${name} already exists. Try another name`);
       return;
     }
 
